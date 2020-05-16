@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-05-16T07:09:16.556Z</updated>
+    <updated>2020-05-16T08:36:05.741Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -10,6 +10,28 @@
     <logo>https://WhiteGrayxp.github.io/images/avatar.png</logo>
     <icon>https://WhiteGrayxp.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, WhiteGray</rights>
+    <entry>
+        <title type="html"><![CDATA[第二篇阅读总结]]></title>
+        <id>https://WhiteGrayxp.github.io/post/applications-of-deep-reinforcement-learning-in-communications-and-networking-a-survey/</id>
+        <link href="https://WhiteGrayxp.github.io/post/applications-of-deep-reinforcement-learning-in-communications-and-networking-a-survey/">
+        </link>
+        <updated>2020-05-16T08:29:21.000Z</updated>
+        <summary type="html"><![CDATA[<p>这篇文章主要对深度强化学习DRL在网络通信方面的应用及研究进展进行总结。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这篇文章主要对深度强化学习DRL在网络通信方面的应用及研究进展进行总结。</p>
+<!-- more -->
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[第一篇阅读总结]]></title>
         <id>https://WhiteGrayxp.github.io/post/di-yi-pian-yue-du-zong-jie/</id>
