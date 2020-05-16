@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-05-16T06:21:28.019Z</updated>
+    <updated>2020-05-16T06:23:52.851Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://WhiteGrayxp.github.io/images/avatar.png</logo>
     <icon>https://WhiteGrayxp.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, WhiteGray</rights>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://WhiteGrayxp.github.io/post/about/</id>
+        <link href="https://WhiteGrayxp.github.io/post/about/">
+        </link>
+        <updated>2020-05-16T06:23:38.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>欢迎来到我的小站呀，很高兴遇见你！🤝<br>
+如果你有任何问题，请联系我！🙏</p>
+</blockquote>
+<h2 id="关于本站">🏠 关于本站</h2>
+<p>该博客用来记录我研究生期间的学习生活。</p>
+<h2 id="博主是谁">👨‍💻 博主是谁</h2>
+<p>我是浙江大学信息与电子工程学院的一名在读研究生。</p>
+<h2 id="联系我呀">📬 联系我呀</h2>
+<ul>
+<li>xpgray@zju.edu.cn</li>
+<li>xpgray@foxmail.com</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[研究计划]]></title>
         <id>https://WhiteGrayxp.github.io/post/yan-jiu-ji-hua/</id>
