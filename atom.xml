@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-05-16T07:01:42.579Z</updated>
+    <updated>2020-05-16T07:09:16.556Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -31,7 +31,6 @@
         });
     </script>
 </head>
-<p>这篇文章主要对此前阅读的三篇关于深度强化学习在信道接入方面应用的论文进行总结。以下按照顺序依次介绍文章主要内容及创新点。</p>
 <h2 id="deep-multi-user-reinforcement-learning-for-distributed-dynamic-spectrum-access"><a href="https://ieeexplore.ieee.org/abstract/document/8532121">Deep Multi-User Reinforcement Learning for Distributed Dynamic Spectrum Access</a></h2>
 <p>这篇文章主要研究的是一个分布式多人场景下的频谱接入方案，考虑类似于Aloha的通信方案，即每个用户在每个时隙开始只需要考虑是否要进行传输，以及选择哪个信道进行传输。假设每个用户传输消息后会接收到一个反馈表示是否传输成功（ACK or NACK）。这篇文章提出的基于DRL的算法根据每个用户各自观察到的环境信息（接收到的ACK)来学习出各自最佳的信道接入方案。该方案是分布式的，每个用户仅能观察到部分环境信息，并且假设用户间不交换信息。该场景中的庞大状态空间、部分观察特性使得设计结构化的高效接入方案非常困难，因此采用基于深度强化学习的方法。</p>
 <p>这篇文章的亮点及贡献可以从算法设计以及理论分析进行划分，如下所示。</p>
