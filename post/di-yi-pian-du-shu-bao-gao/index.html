@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>第一篇读书报告 | WhiteGray</title>
-<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589620193656">
+<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589620362388">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://WhiteGrayxp.github.io/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -102,7 +102,7 @@
                 <div class="post-content">
                     <p>这篇文章主要对此前阅读的三篇关于深度强化学习在信道接入方面应用的论文进行总结。以下按照顺序依次介绍文章主要内容及创新点。</p>
 <!-- more -->
-<head>
+<!-- <head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -112,7 +112,7 @@
             }
         });
     </script>
-</head>
+</head> -->
 <p>这篇文章主要对此前阅读的三篇关于深度强化学习在信道接入方面应用的论文进行总结。以下按照顺序依次介绍文章主要内容及创新点。</p>
 <h2 id="deep-multi-user-reinforcement-learning-for-distributed-dynamic-spectrum-access"><a href="https://ieeexplore.ieee.org/abstract/document/8532121">Deep Multi-User Reinforcement Learning for Distributed Dynamic Spectrum Access</a></h2>
 <p>这篇文章主要研究的是一个分布式多人场景下的频谱接入方案，考虑类似于Aloha的通信方案，即每个用户在每个时隙开始只需要考虑是否要进行传输，以及选择哪个信道进行传输。假设每个用户传输消息后会接收到一个反馈表示是否传输成功（ACK or NACK）。这篇文章提出的基于DRL的算法根据每个用户各自观察到的环境信息（接收到的ACK)来学习出各自最佳的信道接入方案。该方案是分布式的，每个用户仅能观察到部分环境信息，并且假设用户间不交换信息。该场景中的庞大状态空间、部分观察特性使得设计结构化的高效接入方案非常困难，因此采用基于深度强化学习的方法。</p>
