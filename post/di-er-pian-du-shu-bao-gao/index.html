@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>第二篇读书报告 | WhiteGray</title>
-<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589686042135">
+<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589699620705">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://WhiteGrayxp.github.io/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -104,7 +104,7 @@
                     
                 </div>
                 <div class="post-content">
-                    <p>本文主要对深度强化学习（DRL）在网络通信方面的研究进展进行总结。</p>
+                    <p>😫本文主要对深度强化学习（DRL）在网络通信方面的研究进展进行总结。</p>
 <!-- more -->
 <h2 id="1-介绍">1、介绍</h2>
 <p>现代网络诸如物联网、车联网等对分布式和自动化的要求越来越高，要求网络实体在网络环境特性不明确的情况下能够自主决策以最优化网络性能。强化学习能够高效实现这个目的，然而由于网络的复杂性以及庞大规模，状态和动态空间通常非常庞大，因此传统的基于表格的强化学习难以在有限的时间和计算资源情况下得到最优策略，而深度强化学习（DRL）结合深度学习（神经网络）能够克服该困难，因此越来越受到青睐。本文主要介绍深度强化学习在网络和通信方面的应用，具体涉及到<strong>动态频谱接入、速率控制、无线缓存、数据卸载、网络安全及连接保留</strong>等方面，此外对于<strong>流量路由、资源共享、数据收集</strong>等方面也有涉及。</p>
@@ -156,30 +156,60 @@ r_{j}+\gamma \hat{\mathcal{Q}}\left(s_{j+1}, \arg \max _{a_{j+1}} \mathcal{Q}\le
 <li>Rainbow Deep Q-Learning：上述算法改进的集大成者。<br>
 下表对各种DQL算法进行总结对比：<br>
 <img src="https://WhiteGrayxp.github.io/post-images/1589682088392.png" alt="" loading="lazy"><br>
-<strong>注</strong>：文中所有的参考文献编号与原论文保持一致。<br>
+<strong>注</strong>：表中参考文献编号与原论文保持一致。<br>
 <strong>接下来介绍DRL在网络通信方面的具体应用。</strong></li>
 </ul>
 <h2 id="3-网络接入与速率控制">3、网络接入与速率控制</h2>
 <p>网络接入研究内容包括动态频谱接入和（基站）用户关联两部分。</p>
 <h3 id="31-接入控制">3.1、接入控制</h3>
-<p>文章[39]研究了IoT网络中针对一个传感器的动态接入方案，算法基于DQL。问题建模为POMDP，动作为选取一个信道，奖励为选取的信道干扰高低（干扰低则“+1”，干扰高则“-1”）。目标为最大化传感器的期望累计折扣奖励。网络为全连接的DQN结合经验回放，网络输入为动作和观察结果（过去接收到的奖励）的组合。<br>
-文章[43]提出了动态自适应的DQL机制，通过评估训练周期内的累积奖励来决定是否要重新训练网络。<br>
-文章[44]研究多传感器场景下联合信道选择与包转发问题，将其中一个传感器作为中继节点（带缓存空间），优化目标是最大化中继节点的效用（最大化传输包数目与消耗能量的比例），动作是选取信道集合、传输包数量、调制方式。网络采用堆叠的自动编码器（stacked autoencoder）。文章证明了传感器的效用函数有界，保证了算法的收敛性。<br>
-文章[45]研究了能量收集IoT系统中的信道接入问题。系统包含中心控制基站和各种传感器，研究问题是预测传感器的电池状态并以此来选择接入信道的传感器，以最大化总速率。DQN由两个LSTM层组成，第一层预测电池状态；第二次试验预测的电池状态以及信道状态信息来输出信道接入策略。<br>
-文章[46]车辆网中的信道接入问题，目标是在给定时延约束下最大化传输容量。对于每个V2V发射机而言，动作是选择的传输信道以及传输功率，奖励为相应的传输速率即时延。状态由四部分组成：（1）V2V链路的瞬时CSI；（2）过去观测到相应链路上的干扰；（3）相邻车辆过去选择的信道；（3）满足时延需求下剩余的时间。<br>
-文章[47]研究了非授权频谱中的接入问题。对于每个小基站（使用非授权频谱，存在干扰）而言，需要选择接入信道以及传输概率，优化目标为最大化它的总吞吐量。该问题可建模为一个非协作博弈（non-cooperative game），文章提出使用LSTM网络来解决该问题，此外文章证明了小基站的效用函数是凸的，因此DQN算法可以收敛到纳什均衡。<br>
-文章[22]同样研究了类似的蜂窝网络中的接入问题，将问题建模为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>个用户共享<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span>个信道。动作为选取的信道以及传输概率，状态为用户过去动作及其局部观测结果历史。文章证明如果采用非协作效用，最终网络将会收敛到次博弈j均衡局面（subgame perfect equilibrium），即部分用户会不断增大传输概率，最终一直占据信道。<br>
-文章[51]考虑了用户数量变化情况下的接入问题，文章考虑一个多波束卫星系统为新到来的用户分配频谱，这是一个时间相关的序列决策优化问题，可以通过DQN解决。状态包括用户集合，当前信道分配矩阵以及新到来的用户，由于状态具有空间相关性，因此作者提出采用卷积神经网络来提取特征。</p>
+<p>文章[3]研究了IoT网络中针对一个<strong>传感器</strong>的动态接入方案，算法基于DQL。问题建模为POMDP，动作为选取一个信道，奖励为选取的信道干扰高低（干扰低则“+1”，干扰高则“-1”）。目标为最大化传感器的期望累计折扣奖励。网络为全连接的DQN结合经验回放，网络输入为动作和观察结果（过去接收到的奖励）的组合。</p>
+<p>文章[4]提出了<strong>动态自适应</strong>的DQL机制，通过评估训练周期内的累积奖励来决定是否要重新训练网络。</p>
+<p>文章[5]研究<strong>多传感器</strong>场景下联合信道选择与包转发问题，将其中一个传感器作为<strong>中继</strong>节点（带缓存空间），优化目标是最大化中继节点的效用（最大化传输包数目与消耗能量的比例），动作是选取信道集合、传输包数量、调制方式。网络采用堆叠的自动编码器（stacked autoencoder）。文章证明了传感器的效用函数有界，保证了算法的收敛性。</p>
+<p>文章[6]研究了<strong>能量收集IoT系统</strong>中的信道接入问题。系统包含中心控制基站和各种传感器，研究问题是预测传感器的电池状态并以此来选择接入信道的传感器，以最大化总速率。DQN由两个LSTM层组成，第一层预测电池状态；第二次试验预测的电池状态以及信道状态信息来输出信道接入策略。</p>
+<p>文章[7]<strong>车辆网</strong>中的信道接入问题，目标是在给定<strong>时延约束下</strong>最大化传输容量。对于每个V2V发射机而言，动作是选择的传输信道以及传输功率，奖励为相应的传输速率即时延。状态由四部分组成：（1）V2V链路的瞬时CSI；（2）过去观测到相应链路上的干扰；（3）相邻车辆过去选择的信道；（3）满足时延需求下剩余的时间。</p>
+<p>文章[8]研究了<strong>非授权频谱</strong>中的接入问题。对于每个小基站（使用非授权频谱，存在干扰）而言，需要选择接入信道以及传输概率，优化目标为最大化它的总吞吐量。该问题可建模为一个非协作博弈（non-cooperative game），文章提出使用LSTM网络来解决该问题，此外文章证明了小基站的效用函数是凸的，因此DQN算法可以收敛到纳什均衡。</p>
+<p>文章[9]同样研究了类似的<strong>蜂窝网络</strong>中的接入问题，将问题建模为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>个用户共享<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span>个信道。动作为选取的信道以及传输概率，状态为用户过去动作及其局部观测结果历史。文章证明如果采用非协作效用，最终网络将会收敛到次博弈均衡局面（subgame perfect equilibrium），即部分用户会不断增大传输概率，最终一直占据信道。</p>
+<p>文章[10]考虑了<strong>用户数量变化</strong>情况下的接入问题，文章考虑一个多波束卫星系统为新到来的用户分配频谱，这是一个时间相关的序列决策优化问题，可以通过DQN解决。状态包括用户集合，当前信道分配矩阵以及新到来的用户，由于状态具有空间相关性，因此作者提出采用卷积神经网络来提取特征。</p>
 <h3 id="32-用户关联">3.2、用户关联</h3>
+<p>文章[11]考虑<strong>异构网络</strong>（包含多个微基站和宏基站），用户需要选择一个基站以及一个信道接入，即<strong>用户关联以及接入控制的联合优化</strong>问题。该文章优化目标是在保证最低SINR门限要求下选择合适的基站及信道以最大化传输速率。状态定义为所有用户的QoS状态，即一个矢量表明各用户SINR是否满足需求。这篇文章采用的网络结构是Double Dueling Q-Network。</p>
+<p>随后文章[12]同样考虑使用DQL来解决<strong>用户关联、频谱接入、内容缓存的联合优化</strong>问题。网络模型为LTE网络，包含UAV服务地面用户（提供缓存和接入服务）。UAV由云端服务器控制，通过授权蜂窝频段与服务器连接。对于每个UAV而言，优化问题包括：（1）最优的用户关联；（2）使用哪些频谱与服务器相连；（3）哪些时隙使用非授权频段；（4）缓存哪些流行的内容（用户最可能请求），以最大化满足传输时延需求的用户。该文章使用液体状态机（<strong>Liquid state machine</strong>）来预测请求内容（云端执行），随后基于LSM学习进行用户关联（UAV执行），完成之后通过线性规划得到最优频谱分配。论文证明了该DQL算法以概率1收敛。</p>
 <h3 id="33-速率控制">3.3、速率控制</h3>
-<h2 id="4-缓存与卸载">4、缓存与卸载</h2>
-<h2 id="6-挑战与机遇">6、挑战与机遇</h2>
-<h2 id="总结">总结</h2>
-<p>这篇文章介绍了Deep Q-Learning 中常用的改进提升，对DRL在通信网络方面的应用及研究进行了比较全面详细的总结，由于个人研究方向，所以总结过程中侧重于接入控制方面的工作。</p>
+<p>DASH(自适应流媒体协议)是未来非常具有潜力的一种视频流媒体服务标准协议。DASH协议将视频内容划分为多个部分，即通过将视频划分为块并以不同的压缩率进行编码，存储在服务器内。对于用户而言，每个时隙需要选择一个特定码率的分块，相应优化目标是寻找使用户QoE最优的策略（如最大化平均码率、最少话暂停次数）。<br>
+文章[13]将上述问题建模为MDP，并使用DQL求解。用户的动作是选择一个表征（特定码率的分块）进行下载，奖励是（1）视频画面质量；（2）视频观看稳定性；（3）是否重新缓存；（4）缓存空间状态组成的函数。状态空间包括：（1）上次下载的视频分块质量；（2）当前缓存状态；（3）重新缓存的次数；（4）上次下载时的信道容量。文章采用基于LSTM的DQN网络进行学习求解，并基于实际数据集进行测试。</p>
+<p>文章[14]研究类似的优化问题，不过采用**A3C（Asynchronous Advantage Actor-Critic）**算法进行求解以提升算法性能和训练速度。该文章同样经过数据集进行测试，此外A3C算法支持多个用户的并行训练。</p>
+<p>由于视频的分块很多，状态空间非常庞大，因此文章[15]提出采用一个<strong>视频质量预测网络</strong>来减小状态空间，通过CNN和RNN来提取原始视频数据中的由于特征，并作为DQL算法的状态输入。</p>
+<p>除了DASH协议相关的速率控制优化问题外，<strong>HVFT（High Volume Flexible Time）应用也</strong>是一类常见的研究内容，例如通过使用蜂窝网络传输IoT流量，由于其传输数据量通常很大，因此速率控制是非常必要的，传统常用的做法是通过优先级来控制，但缺乏扩展性、不够灵活。DRL是新的有效解决方法。优化目标可以概括为：寻找合适的策略使HVFT应用传输速率最大的同时最小化对网络中现有流量的影响。</p>
+<p>文章[16]使用DQL解决该问题。将基站看着智能体，状态包括当前网络状态以及过去网络状态中提取到的由于特征。具体而言，网络状态包括：（1）拥塞指标；（2）网络连接数目；（3）小区效率等。基站决策的动作是为各用户提供的传输速率集合。收益定义为：（1）HVFT流量和；（2）对网络原有流量造成的损失；（3）低于期望最小吞吐量的字节数。该文章使用LSTM层组成的Actor-critic网络进行学习。</p>
+<p>文章[17]研究<strong>复杂网络系统中多个（矛盾的）目标下的速率控制</strong>问题，例如：低误码率，吞吐量提升，功率和频谱效率等。动作是：（1）符号速率；（2）每个符号的能量；（3）调制模式；（4）每个符号的比特数以及（5）编码速率的组合。奖励定义为各性能参数组成的适应度函数，其中包括：（1）接收机估计的BER；（2）吞吐量；（3）频谱效率；（4）功耗和（5）发射功率效率。为了实现多个不同的目标，该文章采用并行训练多个网络来实现。</p>
+<h2 id="4-挑战与机遇">4、挑战与机遇</h2>
+<ul>
+<li>密集部署网络中对于状态的定义，例如从不同基站获取的RSSI可能差别不大</li>
+<li>动态异构网络中的多智能体强化学习</li>
+<li>训练及性能评估标准（框架），开放的真实数据集合</li>
+<li>分布式深度强化学习框架在无线网络中的应用</li>
+<li>信号精度质量与训练学习质量的平衡，避免获取状态对网络造成过高负荷</li>
+</ul>
+<h2 id="5-总结">5、总结</h2>
+<p>这篇文章介绍了Deep Q-Learning 中常用的改进提升，对DRL在通信网络方面的应用及研究进行了比较全面详细的总结，由于个人研究方向，所以总结过程中侧重于接入控制方面的工作，对其他方面感兴趣的，如缓存与数据卸载、网络安全与连接保留、路由规划、资源共享与规划、数据收集等，请自行参见原论文👏。</p>
+<h2 id="6-参考资料">6、参考资料</h2>
 <ol>
 <li><a href="https://ieeexplore.ieee.org/document/8714026">Applications of Deep Reinforcement Learning in Communications and Networking: A Survey</a></li>
 <li><a href="https://arxiv.org/abs/1710.02298">Rainbow: Combining Improvements in Deep Reinforcement Learning</a></li>
-<li><a href="https://www.jianshu.com/p/1dfd84cd2e69">网上对Rainbow的介绍</a></li>
+<li>S. Wang, H. Liu, P. H. Gomes, and B. Krishnamachari, “Deep reinforcement learning for dynamic multichannel access,” in International Conference on Computing, Networking and Communications (ICNC), 2017.</li>
+<li>S. Wang, H. Liu, P. H. Gomes, and B. Krishnamachari, “Deep reinforcement learning for dynamic multichannel access in wireless networks,” IEEE Transactions on Cognitive Communications and Networking, to appear.</li>
+<li>J. Zhu, Y. Song, D. Jiang, and H. Song, “A new deep-q-learningbased transmission scheduling mechanism for the cognitive internet of things,” IEEE Internet of Things Journal, 2017.</li>
+<li>M. Chu, H. Li, X. Liao, and S. Cui, “Reinforcement learning based multi-access control and battery prediction with energy harvesting in iot systems,” arXiv preprint arXiv:1805.05929, 2018.</li>
+<li>H. Ye and G. Y. Li, “Deep reinforcement learning for resource allocation in v2v communications,” arXiv preprint arXiv:1711.00968, 2017.</li>
+<li>U. Challita, L. Dong, and W. Saad, “Proactive resource management in lte-u systems: A deep learning perspective,” arXiv preprint arXiv:1702.07031, 2017.</li>
+<li>O. Naparstek and K. Cohen, “Deep multi-user reinforcement learning for dynamic spectrum access in multichannel wireless networks,” arXiv preprint arXiv:1704.02613, 2017.</li>
+<li>S. Liu, X. Hu, and W. Wang, “Deep reinforcement learning based dynamic channel allocation algorithm in multibeam satellite systems,” IEEE ACCESS, vol. 6, pp. 15 733–15 742, 2018.</li>
+<li>N. Zhao, Y.-C. Liang, D. Niyato, Y. Pei, M. Wu, and Y. Jiang, “Deep reinforcement learning for user association and resource allocation in heterogeneous networks,” in IEEE GLOBECOM, Abu Dhabi, UAE, Dec. 2018, pp. 1–6.</li>
+<li>M. Chen, W. Saad, and C. Yin, “Liquid state machine learning for resource allocation in a network of cache-enabled lte-u uavs,” in IEEE GLOBECOM, 2017, pp. 1–6.</li>
+<li>M. Gadaleta, F. Chiariotti, M. Rossi, and A. Zanella, “D-dash: A deep q-learning framework for dash video streaming,” IEEE Transactions on Cognitive Communications and Networking, vol. 3, no. 4, pp. 703–718, 2017.</li>
+<li>H. Mao, R. Netravali, and M. Alizadeh, “Neural adaptive video streaming with pensieve,” in Proceedings ofthe Conference ofthe ACM Special Interest Group on Data Communication. ACM, 2017, pp. 197–210.</li>
+<li>T. Huang, R.-X. Zhang, C. Zhou, and L. Sun, “Qarc: Video quality aware rate control for real-time video streaming based on deep reinforcement learning,” arXiv preprint arXiv:1805.02482, 2018.</li>
+<li>S. Chinchali, P. Hu, T. Chu, M. Sharma, M. Bansal, R. Misra, M. Pavone, and K. Sachin, “Cellular network traffic scheduling with deep reinforcement learning,” in National Conference on Artificial Intelligence (AAAI), 2018.</li>
+<li>P. V. R. Ferreira, R. Paffenroth, A. M. Wyglinski, T. M. Hackett, S. G. Bilén, R. C. Reinhart, and D. J. Mortensen, “Multi-objective reinforcement learning for cognitive satellite communications using deep neural network ensembles,” IEEE Journal on Selected Areas in Communications, 2018.</li>
 </ol>
 
                 </div>
