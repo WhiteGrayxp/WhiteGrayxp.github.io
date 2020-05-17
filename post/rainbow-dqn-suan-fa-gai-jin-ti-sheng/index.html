@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Rainbow: DQN算法改进提升 | WhiteGray</title>
-<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589727032509">
+<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1589727307259">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://WhiteGrayxp.github.io/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -108,9 +108,9 @@
 <!-- more -->
 <p>Deep Q-Network作为深度强化学习的代表算法之一，自2013年提出，以及在2015年在AlphaGo中应用以来，就在不同领域优化决策问题中发挥着重要作用。这篇文章将6种DQN算法的提升改进进行综合集成，并对算法性能进行了详尽的对比测试。</p>
 <p>首先，给出Rainbow算法的性能测试结果，如下图所示。图中展示了不同DQN算法变体在Atari游戏上的性能表现，纵坐标表示达到人类评价水平的比例；横坐标表示训练迭代花费的视频帧数。可以看到Rainbow算法在第7M帧即可达到和标准DQN最优性能；在第44M帧即可达到所有其他基准对比算法的最优性能。</p>
-<figure data-type="image" tabindex="1"><img src="https://WhiteGrayxp.github.io/post-images/1589725618604.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://WhiteGrayxp.github.io/post-images/1589725618604.png" alt="" width="600" height="800" loading="lazy"></figure>
 <p>下图则展示了完整版Rainbow算法同缺少单一组件Rainbow算法性能的对比，从图中可以看到，distribution, multi-step以及priority在实验中对Rainbow算法性能的影响比较大。</p>
-<figure data-type="image" tabindex="2"><img src="https://WhiteGrayxp.github.io/post-images/1589726033754.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://WhiteGrayxp.github.io/post-images/1589726033754.png" alt="" width="600" height="800" loading="lazy"></figure>
 <p>感受了Rainbow算法的强大性能后，接下来具体介绍各算法组成部分，以及在Rainbow的具体实现。</p>
 <h2 id="double-dqn"><a href="https://arxiv.org/pdf/1509.06461v3.pdf">Double-DQN</a></h2>
 <p>将动作选择和价值估计分开，避免价值过高估计</p>
