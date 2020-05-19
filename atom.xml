@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-05-19T13:56:37.969Z</updated>
+    <updated>2020-05-19T13:59:04.976Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -23,7 +23,7 @@
 <h2 id="1-deep-reinforcement-learning-based-mode-selection-and-resource-allocation-for-cellular-v2x-communications"><a href="https://ieeexplore.ieee.org/document/8944302">1. Deep Reinforcement Learning Based Mode Selection and Resource Allocation for Cellular V2X Communications</a></h2>
 <p>这篇文章研究的是Cellular V2X通信中的传输模式选择与资源分配联合优化问题，文章提出了基于深度强化学习的分布式算法，<strong>在满足V2V用户对时延和可靠性需求条件下，最大化V2I用户的总传输速率</strong>。考虑到本地模型训练以及新加入用户训练的约束（训练数据少、算力不足、数据隐私等），文章进一步提出了包含两个时间尺度的<strong>联邦DRL算法</strong>（Federated DRL)以得到稳定鲁棒的模型，具体而言，首先在大尺度时间上使用图理论将用户基于信道相似性进行分簇（谱聚类），然后在小尺度时间上使用联邦学习得到簇内的全局模型。新加入的用户可以直接基于相应簇内训练好的模型进行接入操作。</p>
 <p>文章研究的场景图如下所示：<br>
-<img src="https://WhiteGrayxp.github.io/post-images/1589891995055.png" alt="" width="400" height="600" loading="lazy"></p>
+<img src="https://WhiteGrayxp.github.io/post-images/1589891995055.png" alt="" width="400" height="400" loading="lazy"></p>
 <p>将车辆分为使用V2I通信模式的I-VUE，以及使用V2V通信的V2V-Pair，即文章考虑将每一个V2V通信的收发机看作一个配对，然后作为智能体进行决策。文章考虑LOS和NLOS通信环境并存，即部分V2V-Pair之间可能被建筑或其它车辆阻挡，这部分V2V-Pair需要通过基站中继来完成通信，即使用V2I通信模式的V2V-Pair。文章的Problem formulation此处略过，简单概括就是在满足I-VUE最低传输速率、V2V-Pair的时延和可靠性（中断概率）、以及为了简化问题设定的每个V2V-Pair只能分配一个资源块、不同V2V-Pair可以接入同一资源块、每个资源块只能分配给一个使用V2I通信模式的V2V-Pair，以及最高发射功率等等约束条件下，希望最大化I-VUE的速率。这是一个混合非线性整数优化问题，很难求解，因此文章提出使用DRL来进行优化。</p>
 <p>文章提出的基本DRL框架如下图所示。接下来分别介绍MDP问题的三要素：状态、动作、奖励。<br>
 <img src="https://WhiteGrayxp.github.io/post-images/1589892953192.png" alt="" width="500" height="300" loading="lazy"><br>
@@ -41,7 +41,7 @@ A, x \geq 0 \\
 x, x&lt;0
 \end{array}\right.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">{</span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.45em;"><span style="top:-3.61em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span><span style="top:-2.4099999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9500000000000004em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>文章中标准版的分布式DQL算法主要包括经验回放和目标网络两部分，步骤如下图所示：<br>
-<img src="https://WhiteGrayxp.github.io/post-images/1589895584132.png" alt="" width="500" height="800" loading="lazy"></p>
+<img src="https://WhiteGrayxp.github.io/post-images/1589895584132.png" alt="" width="500" height="600" loading="lazy"></p>
 <p>为了解决单一智能体训练不足的缺陷，以及环境中可能存在新加入的车辆导致需要花费时间重新训练模型等不足，文章提出了结合联邦学习的算法改进版本，框架如下图所示：<br>
 <img src="https://WhiteGrayxp.github.io/post-images/1589895895401.png" alt="" width="500" height="500" loading="lazy"><br>
 首先通过如下算法2根据新的相似程度进行分簇，簇内的I-VUE和V2V-Pair之间适用正交信道资源，簇内的V2V-Pair各自根据此前的算法1基于对环境的观测进行训练，然后定期将网络权重参数上传至中心节点（基站）进行联邦学习（权重评价）得到全局模型，再下载到本地各自进行独立的训练。</p>
