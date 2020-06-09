@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-06-09T09:26:53.292Z</updated>
+    <updated>2020-06-09T09:30:16.932Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -16,9 +16,9 @@
         <link href="https://WhiteGrayxp.github.io/post/trpoxin-ren-yu-ce-lue-you-hua-li-lun-tui-dao/">
         </link>
         <updated>2020-06-09T06:35:30.000Z</updated>
-        <summary type="html"><![CDATA[<p>😇这篇文章记录TRPO算法的主要推导过程。</p>
+        <summary type="html"><![CDATA[<p>🤕这篇文章记录TRPO算法的主要推导过程。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>😇这篇文章记录TRPO算法的主要推导过程。</p>
+        <content type="html"><![CDATA[<p>🤕这篇文章记录TRPO算法的主要推导过程。</p>
 <!-- more -->
 <p><strong>TRPO</strong>是一种迭代式的策略优化算法，理论证明了优化过程是单调提高的。在对理论证中的部分步骤采取近似处理后，得到了一个较为实际可行的算法，即<strong>TRPO</strong>算法。</p>
 <p><strong>TRPO</strong>如其名字所示，是一种信任域求解算法，相对于线搜索之类的优化方法，在给定了迭代（前进）方向之后，在一定的约束范围（即所谓的信任域）内求解最佳步长。</p>
