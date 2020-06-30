@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>车联网中的信道资源调度 | WhiteGray</title>
-<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1593433558814">
+<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1593518712463">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://WhiteGrayxp.github.io/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -109,6 +109,14 @@
 <p>文章里面的描述不是特别清楚，似乎是VUE下一次预留的资源，从那些与其Reselection counter一致的VUE当前占用的资源中进行选择，并在其Reselection counter值降为5时，开始判断那些预留资源是否可用。应该为使用同一subframe资源块的不同VUE分配不同的Reselection counter，个人猜测是为了避免半双工导致的碰撞。该机制还假设，如果某个VUE感知到其发生碰撞，可以重新选择资源，并广播其碰撞产生的资源块位置。</p>
 <p>一个重要的假设是，初始时刻为不同的VUE分配了无碰撞产生的资源块，因此该机制不依靠信道感知即可实现较低的碰撞率。</p>
 <h2 id="geo-based-scheduling-for-c-v2x-networks"><a href="https://ieeexplore.ieee.org/document/8744584">Geo-Based Scheduling for C-V2X Networks</a></h2>
+<p>基于感知的半持续调度面临的固有难题是hidden terminal。本文提出了一种基于地理位置的调度方式，不需要对信道资源上存在的干扰进行感知，就能使VUE分布式地自行选择信道资源，资源预留机制与mode 4保保持一致。假设VUE会通过V2V通信广播自己的位置、速度、时间戳等信息，因此不同VUE能够接受到的信息对其他车辆的空间位置进行排序（这篇文章考虑的是直行场景，没有交叉路口，因而空间位置即是一维坐标上的先后排序）。本质上是按照空间上的先后顺序，依次为不同车辆分配不同信道资源。</p>
+<p>该文章提出的调度机制核心在于使每个VUE根据接收到的其他车辆的位置即相对关系，构建出一个虚拟的队列，按照位置前后关系进行排序。每个车辆在该队列中的索引记为<code>PosIndex</code>。每个车辆根据接收到的消息计算自己的<code>PosIndex</code>，并向其他VUE广播该数据。<code>PosIndex</code>取值范围为0到资源选择窗口内所有可用资源块总数目<code>N</code>，即子信道数目乘最大时延需求。<code>PosIndex</code>取值的基本思想是后车在接收到的前车<code>PosIndex</code>取值上递增，若环境中车辆数目大于可用资源总数，则<code>PosIndex</code>值在达到<code>N-1</code>后，重选从0计数。这样使得拥有相同<code>PosIndex</code>值的两辆车（即使用同一信道资源的两辆车）距离最大。</p>
+<p>如果每个车辆仅根据前车的<code>PosIndex</code>进行更新，可能会使更新速度较慢，因此该文章还提出可以使用前面若干辆车的数据进行更新。</p>
+<p>每个车辆根据自己的<code>PosIndex</code>来选择信道资源，即每个<code>PosIndex</code>都对应着一个资源块。如果每个车辆都正确计算了各自的<code>PosIndex</code>，则环境中所有VUE都基于同一个虚拟队列进行资源选择，能够完全避免碰撞产生（车辆数目小于资源数）。由于该机制使得车辆能够借助其他车辆的<code>PosIndex</code>信息知道前方其它车辆使用的信道资源，因此一定程度上能够避免hidden terminal问题产生，隐式地实现了全局协作的效果。</p>
+<p>实际情况中由于车辆的动态特性，仍然无法完全避免hidden terminal问题，例如本来无法相互感知到的两辆车靠近彼此就有可能发生碰撞，并且该错误无传播给相邻的其它后续车辆。为了能够使得发生碰撞的车辆尽快发现彼此，该文章提出，每个VUE虽然按照<code>PosIndex</code>预留了相应信道资源<code>w</code>次（即Reselection cunter），但是需要在这<code>w</code>次传输中的一次需要在其它的某些特定信道资源区域中（对其他车辆产生的干扰尽可能小）完成。这样能够使得原本发生碰撞的车辆有机会在不同的信道资源上进行传输，尽快发现彼此。示意图如下所示：<br>
+<img src="https://WhiteGrayxp.github.io/post-images/1593518236596.png" alt="" width="600" height="300" loading="lazy"><br>
+深色区域为按照<code>PosIndex</code>预留的资源，斜线区域为随机传输使用的区域。</p>
+<p>文章后半部分推导了该资源分配机制下由半双工、接收功率低于感知门限、低于解码门限、包碰撞等导致的数据发送失败概率，进一步得到包传输率PDR指标。仿真结果验证了相应推导的正确性。</p>
 <h2 id="joint-frame-design-and-resource-allocation-for-ultra-reliable-and-low-latency-vehicular-networks"><a href="https://ieeexplore.ieee.org/document/9018369">Joint Frame Design and Resource Allocation for Ultra-Reliable and Low-Latency Vehicular Networks</a></h2>
 <h2 id="non-orthogonal-multiple-access-for-high-reliable-and-low-latency-v2x-communications-in-5g-systems"><a href="https://ieeexplore.ieee.org/document/7974737">Non-Orthogonal Multiple Access for High-Reliable and Low-Latency V2X Communications in 5G Systems</a></h2>
 <h2 id="on-wireless-blind-spots-in-the-c-v2x-sidelink"><a href="https://ieeexplore.ieee.org/document/9112708">On Wireless Blind Spots in the C-V2X Sidelink</a></h2>
