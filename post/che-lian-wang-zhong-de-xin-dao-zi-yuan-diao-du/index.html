@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>车联网中的信道资源调度 | WhiteGray</title>
-<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1593746560709">
+<link rel="shortcut icon" href="https://WhiteGrayxp.github.io/favicon.ico?v=1593765747493">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://WhiteGrayxp.github.io/styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -137,6 +137,12 @@
 <figure data-type="image" tabindex="3"><img src="https://WhiteGrayxp.github.io/post-images/1593432154009.png" alt="" width="400" height="600" loading="lazy"></figure>
 <p>文章一大亮点在于推导了发生WBS事件关于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><msub><mi>m</mi><mi>k</mi></msub><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{m_k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span>的概率，虽然并没有进一步根据该解析结果给出该变量的最优结果，但是仿真结果还是体现了本文所提出机制的有效性。</p>
 <h2 id="semi-persistent-resource-allocation-based-on-traffic-prediction-for-vehicular-communications"><a href="https://ieeexplore.ieee.org/document/8911445">Semi-Persistent Resource Allocation Based on Traffic Prediction for Vehicular Communications</a></h2>
+<p>这篇文章考虑了一种分层异构网络下的资源分配方式，场景如下图所示：<br>
+<img src="https://WhiteGrayxp.github.io/post-images/1593764188067.png" alt="" width="500" height="300" loading="lazy"></p>
+<p>将道路按照RSU的覆盖范围进行分块，车辆的接入频谱直接由RSU管理。</p>
+<p>首先宏基站MBS根据车流量预测结果（假设带宽需求与车流量成比例），为RSU预先分配持续性的频谱资源；然后RSU根据车流量的带宽请求情况，向MBS请求动态的频谱分配，若预先分配的频谱资源满足车辆需求，则RSU不需要再向MBS请求额外的频谱资源。</p>
+<p>该文章使用Space-Time kNN算法来对道路中不同分块区域的车流量进行预测（考虑车流量在不同区域即时间维度上的相关性），进一步分配persistent bandwidth；随后使用灌水法来决定dynamic bandwidth的最优分配，以使相对延迟最小。这里的延迟主要考虑的是signalling delay，即带宽不足产生的传输时延。</p>
+<p>该文章没有考虑车辆跨RSU覆盖范围产生的问题。</p>
 
                 </div>
             </article>
