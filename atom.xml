@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://WhiteGrayxp.github.io</id>
     <title>WhiteGray</title>
-    <updated>2020-10-03T09:28:03.359Z</updated>
+    <updated>2020-10-03T09:32:44.526Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://WhiteGrayxp.github.io"/>
     <link rel="self" href="https://WhiteGrayxp.github.io/atom.xml"/>
@@ -15,7 +15,7 @@
         <id>https://WhiteGrayxp.github.io/post/decentralized-multi-agent-reinforcement-learning-2/</id>
         <link href="https://WhiteGrayxp.github.io/post/decentralized-multi-agent-reinforcement-learning-2/">
         </link>
-        <updated>2020-09-30T08:34:56.000Z</updated>
+        <updated>2020-10-03T08:34:56.000Z</updated>
         <summary type="html"><![CDATA[<p>这篇文章继续记录一篇关于多智能体分布式训练的算法，算是对上一篇文章的改进。<br>
 <a href="https://arxiv.org/abs/1812.06319">Likelihood Quantile Networks for Coordinating Multi-Agent Reinforcement Learning</a></p>
 ]]></summary>
@@ -105,7 +105,7 @@ Q(s, a)+\alpha \delta &amp; \text { otherwise }
 <p>仿真场景设置见原文。<br>
 <img src="https://WhiteGrayxp.github.io/post-images/1601716453093.jpg" alt="" loading="lazy"><br>
 图1(a)表面本文所提出的<code>LH-IQN</code>算法相对于<code>HDRQN</code>算法的性能优势。图1(b)表面，本文提出的TDL值确实随着训练次数增加逐渐上升（训练初期主要受初始化的影响，两个网络不能产生有效的估计，所以会先迅速下降，得到有意义的分布估计）。<br>
-<img src="https://WhiteGrayxp.github.io/post-images/1601716827535.jpg" alt="" loading="lazy"><br>
+<img src="https://WhiteGrayxp.github.io/post-images/1601716827535.jpg" alt="" width="400" height="400" loading="lazy"><br>
 上图则暂时了动态风险调整机制对训练效果的影响，可以看到使用了DRD机制的算法样本采样效率更高，收敛速度更快。</p>
 <h2 id="conclusions">Conclusions</h2>
 <p>这篇文章提出的<code>LH-IQN</code>基于distributional RL算法中的IQL算法，针对多智能体协作问题中的non-stationary问题进行改进，提出的TDL机制对基本的hysteretic learning进行了拓展，能够区分domain non-stationary和domain stochasticity两种造成negative update的原因，实现更稳定高效的训练效果；此外动态风险失真调整机制DRD在训练初期使agents使用更激进的探索策略，随着训练增大逐渐稳定中立，有效改善了算法表现。</p>

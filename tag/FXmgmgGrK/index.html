@@ -9,7 +9,7 @@
 <meta name="description" content="我的个人学习记录">
 <meta name="theme-color" content="#000">
 <title>WhiteGray</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601717276012">
+<link rel="shortcut icon" href="/favicon.ico?v=1601717560670">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -620,7 +620,7 @@ Q(s, a)+\alpha \delta &amp;amp; \text { otherwise }
 &lt;p&gt;仿真场景设置见原文。&lt;br&gt;
 &lt;img src=&#34;https://WhiteGrayxp.github.io/post-images/1601716453093.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
 图1(a)表面本文所提出的&lt;code&gt;LH-IQN&lt;/code&gt;算法相对于&lt;code&gt;HDRQN&lt;/code&gt;算法的性能优势。图1(b)表面，本文提出的TDL值确实随着训练次数增加逐渐上升（训练初期主要受初始化的影响，两个网络不能产生有效的估计，所以会先迅速下降，得到有意义的分布估计）。&lt;br&gt;
-&lt;img src=&#34;https://WhiteGrayxp.github.io/post-images/1601716827535.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://WhiteGrayxp.github.io/post-images/1601716827535.jpg&#34; alt=&#34;&#34; width=&#34;400&#34; height=&#34;400&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
 上图则暂时了动态风险调整机制对训练效果的影响，可以看到使用了DRD机制的算法样本采样效率更高，收敛速度更快。&lt;/p&gt;
 &lt;h2 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;这篇文章提出的&lt;code&gt;LH-IQN&lt;/code&gt;基于distributional RL算法中的IQL算法，针对多智能体协作问题中的non-stationary问题进行改进，提出的TDL机制对基本的hysteretic learning进行了拓展，能够区分domain non-stationary和domain stochasticity两种造成negative update的原因，实现更稳定高效的训练效果；此外动态风险失真调整机制DRD在训练初期使agents使用更激进的探索策略，随着训练增大逐渐稳定中立，有效改善了算法表现。&lt;/p&gt;
